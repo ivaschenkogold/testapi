@@ -177,7 +177,11 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return new ProjectResource(Project::find($id));
+        $project = Project::find($id);
+        if (!$project) {
+            return response()->json(['data' => '']);
+        }
+        return new ProjectResource($project);
     }
 
     /**

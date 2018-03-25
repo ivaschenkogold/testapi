@@ -89,7 +89,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return new UserResource(User::find($id));
+        $user = Task::find($id);
+        if (!$user) {
+            return response()->json(['data' => '']);
+        }
+        return new UserResource($user);
     }
 
     /**

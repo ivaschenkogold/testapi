@@ -178,7 +178,11 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        return new TaskResource(Task::find($id));
+        $task = Task::find($id);
+        if (!$task) {
+            return response()->json(['data' => '']);
+        }
+        return new TaskResource($task);
     }
 
     /**
